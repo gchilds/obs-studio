@@ -215,12 +215,9 @@ static bool init_display_stream(struct display_capture *dc)
 
     os_event_init(&dc->disp_finished, OS_EVENT_TYPE_MANUAL);
 
-    FourCharCode bgra_code = 0;
-    bgra_code = ('B' << 24) | ('G' << 16) | ('R' << 8) | 'A';
-
     const CGSize *size = &dc->frame.size;
     dc->disp = CGDisplayStreamCreateWithDispatchQueue(
-        disp_id, (size_t) size->width, (size_t) size->height, bgra_code, (__bridge CFDictionaryRef) dict,
+        disp_id, (size_t) size->width, (size_t) size->height, kCVPixelFormatType_32BGRA, (__bridge CFDictionaryRef) dict,
         dispatch_queue_create(NULL, NULL),
         ^(CGDisplayStreamFrameStatus status, uint64_t displayTime, IOSurfaceRef frameSurface,
           CGDisplayStreamUpdateRef updateRef) {

@@ -315,11 +315,8 @@ gs_texture_t *device_texture_create_from_iosurface(gs_device_t *device, void *io
 
     OSType pf = IOSurfaceGetPixelFormat(ref);
 
-    FourCharCode l10r_code = 0;
-    l10r_code = ('l' << 24) | ('1' << 16) | ('0' << 8) | 'r';
-
-    FourCharCode bgra_code = 0;
-    bgra_code = ('B' << 24) | ('G' << 16) | ('R' << 8) | 'A';
+    FourCharCode l10r_code = kCVPixelFormatType_ARGB2101010LEPacked;
+    FourCharCode bgra_code = kCVPixelFormatType_32BGRA;
 
     const bool l10r = pf == l10r_code;
     if (pf == 0)

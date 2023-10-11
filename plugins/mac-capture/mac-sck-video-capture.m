@@ -180,9 +180,7 @@ static bool init_screen_stream(struct screen_capture *sc)
     [sc->stream_properties setShowsCursor:!sc->hide_cursor];
     [sc->stream_properties setColorSpaceName:kCGColorSpaceDisplayP3];
     [sc->stream_properties setBackgroundColor:background];
-    FourCharCode l10r_type = 0;
-    l10r_type = ('l' << 24) | ('1' << 16) | ('0' << 8) | 'r';
-    [sc->stream_properties setPixelFormat:l10r_type];
+    [sc->stream_properties setPixelFormat:kCVPixelFormatType_ARGB2101010LEPacked];
 
     if (@available(macOS 13.0, *)) {
 #if __MAC_OS_X_VERSION_MAX_ALLOWED >= 130000
